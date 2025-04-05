@@ -76,7 +76,7 @@ public class Tree<T extends Comparable<T>> {
     }
 
     public void remove(T key) {
-        removeElement(key, root);
+        remove(key, root);
     }
 
     private Node<T> remove(T key, Node<T> root) {
@@ -88,10 +88,10 @@ public class Tree<T extends Comparable<T>> {
                 root = null;
             } else if (root.getLeft() != null) {
                 root.setKey(predecessor(root));
-                root.setLeft(remove(key, root.getLeft()));
+                root.setLeft(remove(root.getKey(), root.getLeft())); // было root.setLeft(remove(key, root.getLeft()));
             } else {
                 root.setKey(successor(root));
-                root.setRight(remove(key, root.getRight()));
+                root.setRight(remove(root.getKey(), root.getRight())); // было root.setRight(remove(key, root.getRight()));
             }
         } else if (key.compareTo(root.getKey()) < 0) {
             root.setLeft(remove(key, root.getLeft()));
